@@ -1,4 +1,4 @@
-const usuariosApi = 'http://hp-api.herokuapp.com/api/characters';
+const usuariosApi = 'https://hp-api.herokuapp.com/api/characters';
 $.get(usuariosApi, function (respuesta, estado) {
     if (estado === 'success') {
         let usuarios = respuesta;
