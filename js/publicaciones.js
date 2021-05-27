@@ -8,7 +8,7 @@ $.get(usuariosApi, function (respuesta, estado) {
                                                 <img src="${usuario.image}" style="width: 30px; height: 30px; border-radius: 50%;">    
                                             </div>
 
-                                            <p class="col-8 pl-0" style="font-size: 12px;">${usuario.name}</p>
+                                            <p class="col-8 pl-0 font-weight-bold" style="font-size: 12px;">${usuario.name}</p>
 
                                             <i class="fas fa-ellipsis-v col-2 text-right"></i>
 
@@ -23,12 +23,12 @@ $.get(usuariosApi, function (respuesta, estado) {
                                             <i class="far fa-bookmark col-6 mt-1 text-right"></i>
 
                                             <div class="col-12">
-                                                <p style="font-size: 12px;" class="mb-0">le gusta a elwebomio y 100 personas mas</p>
+                                                <p style="font-size: 12px;" class="mb-0 font-weight-bold">le gusta a elwebomio y 100 personas mas</p>
                                                 <p style="font-size: 12px; color: grey;">Ver comentarios</p>
                                             </div>
 
                                             <div class="col-12">
-                                                <img src="${usuario.image}" style="width: 30px; height: 30px; border-radius: 50%;">
+                                                <img src="../images/fotoUsuarios/example.jpg" style="width: 30px; height: 30px; border-radius: 50%;">
                                                 <input type="text" placeholder="Añade un comentario..." style="font-size: 12px;" class="border-0 userComment">
                                             </div>
 
@@ -36,7 +36,7 @@ $.get(usuariosApi, function (respuesta, estado) {
                                                 Hace 1 hora
                                             </div>
 
-                                            <i class="fas fa-heart fa-5x shadow-lg likeDblClick" style="color: white; position: absolute; width: 50px; height: 50px; top: 200px; left: 120px;"></i>
+                                            <i class="fas fa-heart fa-5x shadow-lg likeDblClick col-12 text-center" style="color: white; position: absolute; width: 50px; height: 50px; top: 200px; left: 110px;"></i>
                                             
                                         </div>`);
         }
@@ -76,12 +76,29 @@ $.get(usuariosApi, function (respuesta, estado) {
                 $(e.target).next().children('.fa-heart').css('color', 'red');
                 $(e.target).next().children('.fa-heart').removeClass('far');
 
-                $(e.target).siblings('.fas').animate({opacity: 1}, 200, 'linear', function () {
+                $(e.target).siblings('.fa-heart').animate({opacity: 1}, 200, 'linear', function () {
                     $(this).animate({opacity: 0}, 2000);
                 });
                 clicks = 0;
             }
             
+        });
+
+        //MENU AL PRESIONAR LOS 3 PUNTITOS
+        $('.fa-ellipsis-v').click(function (e) { 
+
+            $('header').css('opacity', '0.8');
+            $('main').css('opacity', '0.5');
+
+            $('body').off('click');
+
+            $('.bottomMenu').animate({bottom: '250px'}, function() {
+                $('body').click(function (e) { 
+                    $('.bottomMenu').animate({bottom: 0}, function() {
+                        $('header, main').css('opacity', '1');
+                    });
+                });
+            });
         });
     }
 });
