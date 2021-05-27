@@ -28,7 +28,7 @@ $.get(usuariosApi, function (respuesta, estado) {
                                             </div>
 
                                             <div class="col-12">
-                                                <img src="../images/fotoUsuarios/example.jpg" style="width: 30px; height: 30px; border-radius: 50%;">
+                                                <img src="example.jpg" style="width: 30px; height: 30px; border-radius: 50%;">
                                                 <input type="text" placeholder="Añade un comentario..." style="font-size: 12px;" class="border-0 userComment">
                                             </div>
 
