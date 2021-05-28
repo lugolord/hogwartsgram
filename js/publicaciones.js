@@ -22,8 +22,8 @@ $.get(usuariosApi, function (respuesta, estado) {
 
                                             <i class="far fa-bookmark col-6 mt-1 text-right"></i>
 
-                                            <div class="col-12">
-                                                <p style="font-size: 12px;" class="mb-0 font-weight-bold">le gusta a elwebomio y 100 personas mas</p>
+                                            <div class="col-12 likesAndComments">
+                                                <p style="font-size: 12px;" class="mb-0 font-weight-bold likes">x Me gusta</p>
                                                 <p style="font-size: 12px; color: grey;">Ver comentarios</p>
                                             </div>
 
@@ -33,7 +33,7 @@ $.get(usuariosApi, function (respuesta, estado) {
                                             </div>
 
                                             <div class="col-12" style="font-size: 10px; color: grey;">
-                                                Hace 1 hora
+                                                Hace x tiempo
                                             </div>
 
                                             <i class="fas fa-heart fa-5x shadow-lg likeDblClick col-12 text-center" style="color: white; position: absolute; width: 50px; height: 50px; top: 200px; left: 110px;"></i>
@@ -49,6 +49,7 @@ $.get(usuariosApi, function (respuesta, estado) {
                 $(e.target).removeClass('likeIt fas')
                 $(e.target).addClass('far');;
                 $(e.target).css('color', 'black');
+                $(e.target).parent().siblings('.likesAndComments').children('.likes').html('x Me gusta');
 
             }
             else {
@@ -57,6 +58,7 @@ $.get(usuariosApi, function (respuesta, estado) {
                 $(e.target).css('color', 'red');
                 $(e.target).removeClass('far');
                 $(e.target).addClass('fas');
+                $(e.target).parent().siblings('.likesAndComments').children('.likes').html('x+1 Me gusta');
 
             }
             
@@ -70,16 +72,21 @@ $.get(usuariosApi, function (respuesta, estado) {
             clicks++;
 
             if (clicks == 2) {
-                console.log('doble click');
 
                 $(e.target).next().children('.fa-heart').addClass('likeIt fas');
+
                 $(e.target).next().children('.fa-heart').css('color', 'red');
+
                 $(e.target).next().children('.fa-heart').removeClass('far');
 
                 $(e.target).siblings('.fa-heart').animate({opacity: 1}, 200, 'linear', function () {
                     $(this).animate({opacity: 0}, 2000);
                 });
+
                 clicks = 0;
+
+                $(e.target).siblings('.likesAndComments').children('.likes').html('x+1 Me gusta');
+
             }
             
         });
@@ -92,7 +99,7 @@ $.get(usuariosApi, function (respuesta, estado) {
 
             $('body').off('click');
 
-            $('.bottomMenu').animate({bottom: '250px'}, function() {
+            $('.bottomMenu').animate({bottom: '260px'}, function() {
                 $('body').click(function (e) { 
                     $('.bottomMenu').animate({bottom: 0}, function() {
                         $('header, main').css('opacity', '1');
