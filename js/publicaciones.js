@@ -107,12 +107,5 @@ $.get(usuariosApi, function (respuesta, estado) {
                 });
             });
         });
-
-        const bottomMenu = document.getElementById('bottomMenu');
-        bottomMenu.addEventListener('touchmove', muevelo);
-
-        function muevelo() {
-            $('body').css('background-color', 'black');
-        };
     }
 });
