@@ -10,7 +10,7 @@ $.get(usuariosApi, function (respuesta, estado) {
 
                                             <p class="col-8 pl-0 font-weight-bold" style="font-size: 12px;">${usuario.name}</p>
 
-                                            <i class="fas fa-ellipsis-v col-2 text-right"></i>
+                                            <i class="fas fa-ellipsis-v col-2 text-right" style="font-size: 14px;"></i>
 
                                             <img src="${usuario.image}" class="col-12 p-0 userPost" style="max-height: 400px;">
 
@@ -99,13 +99,20 @@ $.get(usuariosApi, function (respuesta, estado) {
 
             $('body').off('click');
 
-            $('.bottomMenu').animate({bottom: '260px'}, function() {
+            $('#bottomMenu').animate({bottom: '260px'}, function() {
                 $('body').click(function (e) { 
-                    $('.bottomMenu').animate({bottom: 0}, function() {
+                    $('#bottomMenu').animate({bottom: 0}, function() {
                         $('header, main').css('opacity', '1');
                     });
                 });
             });
         });
+
+        const bottomMenu = document.getElementById('bottomMenu');
+        bottomMenu.addEventListener('touchmove', muevelo);
+
+        function muevelo() {
+            $('body').css('background-color', 'black');
+        };
     }
 });
