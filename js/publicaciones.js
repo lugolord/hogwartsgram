@@ -26,7 +26,9 @@ $.get(usuariosApi, function (respuesta, estado) {
                                                 <i class="far fa-paper-plane"></i>
                                             </div>
 
-                                            <i class="far fa-bookmark col-6 mt-1 text-right coleccion"></i>
+                                            <div class="col-6 text-right">
+                                                <i class="far fa-bookmark mt-1 coleccion"></i>
+                                            </div>                    
 
                                             <div class="col-12 likesAndComments">
                                                 <p style="font-size: 12px;" class="mb-0 font-weight-bold likes">x Me gusta</p>
@@ -82,26 +84,18 @@ $.get(usuariosApi, function (respuesta, estado) {
         //LIKE CON DOBLE CLICK
         var clicks = 0;
         $('.userPost').click(function (e) { 
+
             e.preventDefault();
 
             clicks++;
 
             if (clicks == 2) {
 
-                $(e.target).siblings('.postActions').children('.fa-heart').addClass('likeIt fas');
+                latido(e.target);
 
-                $(e.target).siblings('.postActions').children('.fa-heart').css('color', 'red');
-
-                $(e.target).siblings('.postActions').children('.fa-heart').removeClass('far');
-
-                $(e.target).siblings('.fa-heart').animate({opacity: 1}, 200, 'linear', function () {
-                    $(this).animate({opacity: 0}, 2000);
-                });
+                setTimeout(eliminarLatido, 100, e.target);
 
                 clicks = 0;
-
-                $(e.target).siblings('.likesAndComments').children('.likes').html('x+1 Me gusta');
-
             }
             
         });
@@ -110,6 +104,7 @@ $.get(usuariosApi, function (respuesta, estado) {
         $('.fa-ellipsis-v').click(function (e) { 
 
             $('header').css('opacity', '0.8');
+            
             $('main').css('opacity', '0.5');
 
             $('main').off('click');
@@ -134,6 +129,10 @@ $.get(usuariosApi, function (respuesta, estado) {
                 $(e.target).removeClass('fas guardado');
 
                 $(e.target).addClass('far');
+
+                latido(e.target);
+
+                setTimeout(eliminarLatido, 100, e.target);
             }
             else {
                 
@@ -142,12 +141,16 @@ $.get(usuariosApi, function (respuesta, estado) {
 
                 $(e.target).removeClass('far');
 
+                latido(e.target);
+
+                setTimeout(eliminarLatido, 100, e.target);
+
                 //BARRA DE GUARDAR EN COLECCION
-                $(e.target).siblings('.guardarEnColeccion').animate({height: '40px'}, function () {
+                $(e.target).parent().siblings('.guardarEnColeccion').animate({height: '40px'}, function () {
 
-                    $(e.target).siblings('.guardarEnColeccion').delay(3000).animate({height: '1px'}, function () {
+                    $(e.target).parent().siblings('.guardarEnColeccion').delay(3000).animate({height: '1px'}, function () {
 
-                        $(e.target).siblings('.guardarEnColeccion').css('display', 'none');
+                        $(e.target).parent().siblings('.guardarEnColeccion').css('display', 'none');
                     });
                 })
                            .css('display', 'block');

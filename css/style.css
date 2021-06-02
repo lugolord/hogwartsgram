@@ -76,11 +76,9 @@ footer #bottomMenu {
 }
 
 /* KEYFRAMES */
+
 @keyframes latido {
-    0%{
-        transform: scale(0.5, 0.5);
-        color: red;
-    }
-    50%{transform: scale(1.2, 1.2);}
+    0%{transform: scale(0.5, 0.5);}
+    50%{transform: scale(1.1, 1.1);}
     100%{transform: scale(1, 1);}
 }
