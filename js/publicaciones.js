@@ -14,13 +14,19 @@ $.get(usuariosApi, function (respuesta, estado) {
 
                                             <img src="${usuario.image}" class="col-12 p-0 userPost" style="max-height: 400px;">
 
-                                            <div class="col-6 mt-1">
+                                            <div class="col-12 pl-0 pr-0 guardarEnColeccion">
+                                                <img src="${usuario.image}" style="height: 30px; width: 30px;" class="mt-1 ml-2 rounded">
+                                                <p class="d-inline-block mb-0 mt-2">Guardado</p>
+                                                <p class="float-right mb-0 mt-2 mr-2 font-weight-bold" style="color: #3489eb;">Guardar en la coleccion</p>
+                                            </div>
+
+                                            <div class="col-6 mt-1 postActions">
                                                 <i class="far fa-heart pr-2 likeBtn"></i>
                                                 <i class="far fa-comment pr-2"></i>
                                                 <i class="far fa-paper-plane"></i>
                                             </div>
 
-                                            <i class="far fa-bookmark col-6 mt-1 text-right"></i>
+                                            <i class="far fa-bookmark col-6 mt-1 text-right coleccion"></i>
 
                                             <div class="col-12 likesAndComments">
                                                 <p style="font-size: 12px;" class="mb-0 font-weight-bold likes">x Me gusta</p>
@@ -46,20 +52,29 @@ $.get(usuariosApi, function (respuesta, estado) {
             
             if ($(e.target).hasClass('likeIt')) {
 
-                $(e.target).removeClass('likeIt fas')
-                $(e.target).addClass('far');;
-                $(e.target).css('color', 'black');
-                $(e.target).parent().siblings('.likesAndComments').children('.likes').html('x Me gusta');
+                $(e.target).removeClass('likeIt fas');
 
+                $(e.target).addClass('far');
+
+                latido(e.target);
+
+                setTimeout(eliminarLatido, 100, e.target);
+                
+                $(e.target).parent().siblings('.likesAndComments').children('.likes').html('x Me gusta');
             }
             else {
 
                 $(e.target).addClass('likeIt');
-                $(e.target).css('color', 'red');
-                $(e.target).removeClass('far');
-                $(e.target).addClass('fas');
-                $(e.target).parent().siblings('.likesAndComments').children('.likes').html('x+1 Me gusta');
 
+                latido(e.target);
+
+                setTimeout(eliminarLatido, 100, e.target);
+
+                $(e.target).removeClass('far');
+
+                $(e.target).addClass('fas');
+
+                $(e.target).parent().siblings('.likesAndComments').children('.likes').html('x+1 Me gusta');
             }
             
         }); 
@@ -73,11 +88,11 @@ $.get(usuariosApi, function (respuesta, estado) {
 
             if (clicks == 2) {
 
-                $(e.target).next().children('.fa-heart').addClass('likeIt fas');
+                $(e.target).siblings('.postActions').children('.fa-heart').addClass('likeIt fas');
 
-                $(e.target).next().children('.fa-heart').css('color', 'red');
+                $(e.target).siblings('.postActions').children('.fa-heart').css('color', 'red');
 
-                $(e.target).next().children('.fa-heart').removeClass('far');
+                $(e.target).siblings('.postActions').children('.fa-heart').removeClass('far');
 
                 $(e.target).siblings('.fa-heart').animate({opacity: 1}, 200, 'linear', function () {
                     $(this).animate({opacity: 0}, 2000);
@@ -97,15 +112,47 @@ $.get(usuariosApi, function (respuesta, estado) {
             $('header').css('opacity', '0.8');
             $('main').css('opacity', '0.5');
 
-            $('body').off('click');
+            $('main').off('click');
 
             $('#bottomMenu').animate({bottom: '260px'}, function() {
-                $('body').click(function (e) { 
+                $('main').click(function (e) { 
                     $('#bottomMenu').animate({bottom: 0}, function() {
                         $('header, main').css('opacity', '1');
                     });
                 });
             });
+        });
+
+        //GUARDAR EN COLECCION 
+        $('.coleccion').click(function (e) { 
+            
+            e.preventDefault();
+            
+            //ANIMACION ICONO
+            if ($(e.target).hasClass('guardado')) {
+
+                $(e.target).removeClass('fas guardado');
+
+                $(e.target).addClass('far');
+            }
+            else {
+                
+                //ANIMACION ICONO BOOKMARK
+                $(e.target).addClass('fas guardado');
+
+                $(e.target).removeClass('far');
+
+                //BARRA DE GUARDAR EN COLECCION
+                $(e.target).siblings('.guardarEnColeccion').animate({height: '40px'}, function () {
+
+                    $(e.target).siblings('.guardarEnColeccion').delay(3000).animate({height: '1px'}, function () {
+
+                        $(e.target).siblings('.guardarEnColeccion').css('display', 'none');
+                    });
+                })
+                           .css('display', 'block');
+                           
+            }
         });
     }
 });
