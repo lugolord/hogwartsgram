@@ -86,18 +86,23 @@ $.get(usuariosApi, function (respuesta, estado) {
         $('.userPost').click(function (e) { 
 
             e.preventDefault();
-
+            
             clicks++;
 
+            function eliminarClicks() { //NO SE POR QUE NO FUNCIONA SI AGREGO LA FUNCION EN FUNCIONES.JS Y AQUI SI
+                clicks = 0;
+                return clicks;
+            }
+
+            setTimeout(eliminarClicks, 1000);
+            
             if (clicks == 2) {
 
                 latido(e.target);
 
                 setTimeout(eliminarLatido, 100, e.target);
-
-                clicks = 0;
             }
-            
+            console.log(clicks);
         });
 
         //MENU AL PRESIONAR LOS 3 PUNTITOS
