@@ -110,6 +110,8 @@ $.get(usuariosApi, function (respuesta, estado) {
             
             $('main').css('opacity', '0.6').off('click').bind('touchmove', false);
 
+            $('#bottomMenu').bind('touchmove', false);
+
             $('#bottomMenu').animate({bottom: '260px'}, function() {
 
                 $('main').click(function (e) { 
