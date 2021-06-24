@@ -107,17 +107,18 @@ $.get(usuariosApi, function (respuesta, estado) {
 
         //MENU AL PRESIONAR LOS 3 PUNTITOS
         $('.fa-ellipsis-v').click(function (e) { 
-
-            $('header').css('opacity', '0.8');
             
-            $('main').css('opacity', '0.5');
-
-            $('main').off('click');
+            $('main').css('opacity', '0.6').off('click').bind('touchmove', false);
 
             $('#bottomMenu').animate({bottom: '260px'}, function() {
+
                 $('main').click(function (e) { 
+
                     $('#bottomMenu').animate({bottom: 0}, function() {
+
                         $('header, main').css('opacity', '1');
+
+                        $('main').unbind('touchmove');
                     });
                 });
             });
